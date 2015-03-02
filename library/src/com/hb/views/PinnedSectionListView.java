@@ -131,10 +131,18 @@ public class PinnedSectionListView extends ListView {
 	/** Default change observer. */
     private final DataSetObserver mDataSetObserver = new DataSetObserver() {
         @Override public void onChanged() {
-            recreatePinnedShadow();
+            post(new Runnable() {
+    			@Override public void run() { 
+    			    recreatePinnedShadow();
+    			}
+    		});
         };
         @Override public void onInvalidated() {
-            recreatePinnedShadow();
+        	post(new Runnable() {
+    			@Override public void run() { 
+    			    recreatePinnedShadow();
+    			}
+    		});
         }
     };
 
